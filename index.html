@@ -180,12 +180,12 @@
             </div>
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Video Placeholder 1 -->
-                <div class="section-card aspect-video flex items-center justify-center p-4">
-                    <div class="text-center">
-                        <svg class="w-16 h-16 mx-auto text-slate-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                        <p class="mt-2 text-slate-400">Video Placeholder 1</p>
-                        <p class="text-sm text-slate-500">A short description of the video content.</p>
-                    </div>
+                <div class="section-card aspect-video flex items-center justify-center p-4 overflow-hidden">
+                    <!-- The video will autoplay, loop, and be muted. Controls are enabled for user interaction. -->
+                    <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
+                        <source src="glenn-walking-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <!-- Video Placeholder 2 -->
                 <div class="section-card aspect-video flex items-center justify-center p-4">
@@ -313,4 +313,5 @@
     </script>
 </body>
 </html>
+
 
