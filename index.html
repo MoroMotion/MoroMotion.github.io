@@ -102,7 +102,7 @@
 
     <main class="container mx-auto px-6">
 
-        <!-- Hero Section -->
+        <!-- 1. Hero Section -->
         <section class="text-center min-h-[80vh] flex flex-col justify-center items-center pt-32 pb-10">
             <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Engineering for Humanity's<br> <span class="gradient-text">Toughest Challenges</span></h1>
             <p class="max-w-3xl mx-auto text-lg text-slate-400 mb-8">We build adaptable humanoid robots to perform the world's most dangerous jobs, so humans don't have to.</p>
@@ -114,22 +114,50 @@
             </div>
         </section>
 
-        <!-- Mission Section -->
+        <!-- 2. Mission Section -->
         <section id="mission" class="py-8 fade-in-section">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                     <img src="robot-disarming-ordnance.jpg" alt="AI-generated image of a robot disarming ordnance" class="rounded-xl shadow-lg border border-purple-500/20">
-                </div>
+            <div class="max-w-4xl mx-auto text-center">
                 <div class="section-card p-8 md:p-10">
                     <h2 class="text-3xl font-bold mb-4 gradient-text">A New Frontier for Safety</h2>
                     <p class="text-slate-300 leading-relaxed">
                         Moro Motion’s mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments—from disaster response and bomb disposal to space exploration. By merging human intuition with robotic resilience, we are building a safer future.
                     </p>
                 </div>
+                 <div class="mt-8">
+                     <img src="robot-and-landmine.jpg" alt="AI-generated image of a robot disarming ordnance" class="rounded-xl shadow-lg border border-purple-500/20">
+                </div>
             </div>
         </section>
 
-        <!-- Applications Section -->
+        <!-- 3. Technical Information & AI -->
+        <section id="tech" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
+                 <h2 class="text-4xl font-bold tracking-tight">Introducing <span class="gradient-text">GLENN</span></h2>
+                 <p class="mt-4 text-lg text-slate-400">Gait Learning and Evaluation using Neural Networking</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                 <div class="md:col-span-1 sticky top-24 space-y-8">
+                    <img src="glenn-in-lab.jpg" alt="Technical Schematic of GLENN Robot" class="rounded-xl border border-slate-700">
+                    <img src="engineer-and-robot-ai.png" alt="Engineer interacting with robot AI in a lab" class="rounded-xl border border-slate-700">
+                </div>
+                <div class="md:col-span-1 space-y-8">
+                    <div class="section-card p-8">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text">Technical Information</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            GLENN uses a mix of synchronous and servo motors to control his limbs. Re-chargeable lithium-ion batteries supply 24 Volts to GLENN’s system which powers 10+ synchronous cycloidal drive motors for his arms, legs, and core. A LattePanda 3 Delta computer with an external AI processor controls the entire robot system.
+                        </p>
+                    </div>
+                    <div class="section-card p-8">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text">AI Implementation</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            GLENN was trained using NVIDIA’s Isaac Lab/Sim, a simulation and Reinforcement Learning (RL) training software that uses a complex Proximal Policy Optimization (PPO) algorithm to run thousands of iterations that help GLENN learn how to navigate through real world landscape. This trained policy is deployed onto the LattePanda 3 Delta which combined with the AI Accelerator create a bridge between the trained neural network and the hardware.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Applications Section -->
         <section id="applications" class="py-8 fade-in-section">
             <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold tracking-tight">An Adaptable Platform for Any <span class="gradient-text">Hazard</span></h2>
@@ -154,28 +182,7 @@
             </div>
         </section>
 
-        <!-- What Makes Us Unique -->
-        <section id="unique" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold tracking-tight">The Moro Motion <span class="gradient-text">Advantage</span></h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Modular Design</h3>
-                    <p class="text-slate-400">Our unique design incorporates modularity into the humanoid robot, allowing for rapid adaptation and repair in the field.</p>
-                </div>
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Rapid Prototyping</h3>
-                    <p class="text-slate-400">We have the skills and in-house facilities to prototype quickly and make physical parts on the same day, accelerating development.</p>
-                </div>
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Government Connections</h3>
-                    <p class="text-slate-400">Our connections provide us with a direct pipeline into the Explosive Ordinance Disposal (EOD) market and other key sectors.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Video Section -->
+        <!-- 5. Video Section -->
         <section id="videos" class="py-8 fade-in-section">
             <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold tracking-tight">GLENN in <span class="gradient-text">Action</span></h2>
@@ -198,38 +205,29 @@
                 </div>
             </div>
         </section>
-
-        <!-- Introducing GLENN -->
-        <section class="py-8 text-center fade-in-section">
-            <h2 class="text-4xl font-bold tracking-tight">Introducing <span class="gradient-text">GLENN</span></h2>
-            <p class="mt-4 text-lg text-slate-400">Gait Learning and Evaluation using Neural Networking</p>
-        </section>
         
-        <!-- Technical Information & AI -->
-        <section id="tech" class="py-8 fade-in-section">
-            <div class="grid md:grid-cols-2 gap-12 items-start">
-                 <div class="md:col-span-1 sticky top-24 space-y-8">
-                    <img src="glenn-cad-model.jpg" alt="Technical Schematic of GLENN Robot" class="rounded-xl border border-slate-700">
-                    <img src="engineer-and-robot-ai.png" alt="Engineer interacting with robot AI in a lab" class="rounded-xl border border-slate-700">
+        <!-- 6. What Makes Us Unique -->
+        <section id="unique" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold tracking-tight">The Moro Motion <span class="gradient-text">Advantage</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="section-card p-8 text-center">
+                    <h3 class="text-xl font-bold text-sky-400 mb-3">Modular Design</h3>
+                    <p class="text-slate-400">Our unique design incorporates modularity into the humanoid robot, allowing for rapid adaptation and repair in the field.</p>
                 </div>
-                <div class="md:col-span-1 space-y-8">
-                    <div class="section-card p-8">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">Technical Information</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            GLENN uses a mix of synchronous and servo motors to control his limbs. Re-chargeable lithium-ion batteries supply 24 Volts to GLENN’s system which powers 10+ synchronous cycloidal drive motors for his arms, legs, and core. A LattePanda 3 Delta computer with an external AI processor controls the entire robot system.
-                        </p>
-                    </div>
-                    <div class="section-card p-8">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">AI Implementation</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            GLENN was trained using NVIDIA’s Isaac Lab/Sim, a simulation and Reinforcement Learning (RL) training software that uses a complex Proximal Policy Optimization (PPO) algorithm to run thousands of iterations that help GLENN learn how to navigate through real world landscape. This trained policy is deployed onto the LattePanda 3 Delta which combined with the AI Accelerator create a bridge between the trained neural network and the hardware.
-                        </p>
-                    </div>
+                <div class="section-card p-8 text-center">
+                    <h3 class="text-xl font-bold text-sky-400 mb-3">Rapid Prototyping</h3>
+                    <p class="text-slate-400">We have the skills and in-house facilities to prototype quickly and make physical parts on the same day, accelerating development.</p>
+                </div>
+                <div class="section-card p-8 text-center">
+                    <h3 class="text-xl font-bold text-sky-400 mb-3">Government Connections</h3>
+                    <p class="text-slate-400">Our connections provide us with a direct pipeline into the Explosive Ordinance Disposal (EOD) market and other key sectors.</p>
                 </div>
             </div>
         </section>
-        
-        <!-- Team Section -->
+
+        <!-- 7. Team Section -->
         <section id="team" class="py-8 fade-in-section">
             <div class="text-center mb-8">
                  <h2 class="text-4xl font-bold tracking-tight">Our <span class="gradient-text">Team</span></h2>
@@ -258,13 +256,13 @@
                     Guided by 5 expert Entrepreneurs in Residence (EIRs) from the New Venture Accelerator, and proud of our roots at Auburn University.
                 </p>
                 <div class="flex justify-center items-center space-x-8 md:space-x-12 mt-6">
-                    <img src="auburn-university-logo.png" alt="Auburn University Logo" class="h-16">
-                    <img src="nva-logo.jpg" alt="New Venture Accelerator Logo" class="h-12">
+                    <img src="auburn-university-logo.png" alt="Auburn University Logo" class="h-16 filter invert opacity-80 hover:opacity-100 transition-opacity">
+                    <img src="nva-logo.jpg" alt="New Venture Accelerator Logo" class="h-12 filter invert opacity-80 hover:opacity-100 transition-opacity">
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- 8. Contact Section -->
         <section id="contact" class="py-8 text-center fade-in-section">
              <h2 class="text-4xl font-bold tracking-tight mb-4">Join Us in Building a <span class="gradient-text">Safer Future</span></h2>
              <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-8">We're looking for partners, investors, and talent to accelerate our mission. If you're passionate about the future of robotics, we'd love to hear from you.</p>
