@@ -40,6 +40,7 @@
             z-index: -1;
             transition: all 1s ease-in-out;
         }
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -53,6 +54,8 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #0ea5e9;
         }
+        
+        /* Animation for scroll */
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -62,127 +65,36 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .parallax {
-            transition: transform 0.5s ease-out;
-        }
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        .typing-cursor {
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(to right, #38bdf8, #a78bfa);
-            z-index: 100;
-            transition: width 0.1s ease;
-        }
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #38bdf8, #a78bfa);
-        }
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #38bdf8;
-            border: 4px solid #0a0a0a;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .badge-glow {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-        }
-        .video-container {
-            position: relative;
-            cursor: pointer;
-        }
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .video-container:hover .video-overlay {
-            opacity: 1;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal.active {
-            display: flex;
-        }
     </style>
 </head>
 <body class="antialiased relative overflow-x-hidden">
-
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress" class="scroll-progress" style="width: 0%"></div>
 
     <!-- Glow effects for background -->
     <div id="glow1" class="glow-effect top-0 left-0"></div>
     <div id="glow2" class="glow-effect bottom-0 right-0 rotate-180"></div>
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/5">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
         <div class="container mx-auto px-6 py-4">
             <nav class="flex items-center justify-between">
                 <a href="#" class="text-2xl font-bold tracking-tighter">MORO <span class="gradient-text">MOTION</span></a>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#mission" class="text-slate-300 hover:text-sky-400 transition-colors">Mission</a>
-                    <a href="#impact" class="text-slate-300 hover:text-sky-400 transition-colors">Impact</a>
-                    <a href="#tech" class="text-slate-300 hover:text-sky-400 transition-colors">Technology</a>
                     <a href="#applications" class="text-slate-300 hover:text-sky-400 transition-colors">Applications</a>
-                    <a href="#roadmap" class="text-slate-300 hover:text-sky-400 transition-colors">Roadmap</a>
+                    <a href="#tech" class="text-slate-300 hover:text-sky-400 transition-colors">Technology</a>
                     <a href="#team" class="text-slate-300 hover:text-sky-400 transition-colors">Team</a>
-                    <a href="#contact" class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition-colors">Contact</a>
+                    <a href="#contact" class="text-slate-300 hover:text-sky-400 transition-colors">Contact</a>
                 </div>
                 <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </nav>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-black/50 backdrop-blur-md">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50">
              <a href="#mission" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Mission</a>
-             <a href="#impact" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Impact</a>
-             <a href="#tech" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Technology</a>
              <a href="#applications" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Applications</a>
-             <a href="#roadmap" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Roadmap</a>
+             <a href="#tech" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Technology</a>
              <a href="#team" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Team</a>
              <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Contact</a>
         </div>
@@ -190,22 +102,11 @@
 
     <main class="container mx-auto px-6">
 
-        <!-- 1. Enhanced Hero Section -->
-        <section class="text-center min-h-[90vh] flex flex-col justify-center items-center pt-32 pb-10">
-            <div class="mb-6 flex items-center justify-center space-x-4">
-                <span class="badge-glow px-4 py-2 bg-sky-500/20 border border-sky-500/50 rounded-full text-sm text-sky-300">🎓 Auburn University Backed</span>
-                <span class="badge-glow px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-sm text-purple-300">🚀 NVA Accelerated</span>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">
-                Engineering for Humanity's<br> 
-                <span class="gradient-text" id="typed-text">Toughest Challenges</span><span class="typing-cursor gradient-text">|</span>
-            </h1>
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-400 mb-8">We build adaptable humanoid robots to perform the world's most dangerous jobs, so humans don't have to.</p>
-            <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                <a href="#contact" class="bg-sky-500 text-white font-bold py-4 px-8 rounded-lg hover:bg-sky-600 transition-all hover:scale-105 shadow-lg shadow-sky-500/20">Get in Touch</a>
-                <a href="#tech" class="bg-white/5 border border-white/10 text-white font-bold py-4 px-8 rounded-lg hover:bg-white/10 transition-colors">Explore GLENN</a>
-            </div>
-            <div class="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl shadow-sky-500/10 border border-sky-500/20 overflow-hidden parallax-hero">
+        <!-- 1. Hero Section -->
+        <section class="text-center min-h-[80vh] flex flex-col justify-center items-center pt-32 pb-10">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Engineering for Humanity's<br> <span class="gradient-text">Toughest Challenges</span></h1>
+            <p class="max-w-3xl mx-auto text-lg text-slate-400 mb-8">We build adaptable humanoid robots to perform the world's most dangerous jobs, so humans don't have to.</p>
+            <div class="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl shadow-sky-500/10 border border-sky-500/20 overflow-hidden">
                  <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                     <source src="hero-video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -213,338 +114,168 @@
             </div>
         </section>
 
-        <!-- 2. Impact Metrics Section (NEW) -->
-        <section id="impact" class="py-16 fade-in-section">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold tracking-tight">Our <span class="gradient-text">Impact</span></h2>
-                    <p class="mt-4 text-slate-400">Real progress toward a safer future</p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="section-card p-8 text-center">
-                        <div class="text-5xl font-black gradient-text mb-2" data-count="500">0</div>
-                        <div class="text-sm text-slate-400">Hours of Development</div>
-                    </div>
-                    <div class="section-card p-8 text-center">
-                        <div class="text-5xl font-black gradient-text mb-2" data-count="10">0</div>
-                        <div class="text-sm text-slate-400">Prototype Iterations</div>
-                    </div>
-                    <div class="section-card p-8 text-center">
-                        <div class="text-5xl font-black gradient-text mb-2" data-count="5">0</div>
-                        <div class="text-sm text-slate-400">Expert Advisors</div>
-                    </div>
-                    <div class="section-card p-8 text-center">
-                        <div class="text-5xl font-black gradient-text mb-2" data-count="100">0</div>
-                        <div class="text-sm text-slate-400">Lives We Aim to Save</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Mission Section -->
-        <section id="mission" class="py-16 fade-in-section">
+        <!-- 2. Mission Section -->
+        <section id="mission" class="py-8 fade-in-section">
             <div class="max-w-4xl mx-auto text-center">
                 <div class="section-card p-8 md:p-10">
                     <h2 class="text-3xl font-bold mb-4 gradient-text">A New Frontier for Safety</h2>
-                    <p class="text-slate-300 leading-relaxed text-lg">
-                        Moro Motion's mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments—from disaster response and bomb disposal to space exploration. By merging human intuition with robotic resilience, we are building a safer future.
+                    <p class="text-slate-300 leading-relaxed">
+                        Moro Motion’s mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments—from disaster response and bomb disposal to space exploration. By merging human intuition with robotic resilience, we are building a safer future.
                     </p>
                 </div>
-                 <div class="mt-8 parallax">
-                     <img src="robot-and-landmine.png" alt="AI-generated image of a robot disarming ordnance" class="rounded-xl shadow-lg border border-purple-500/20 w-full">
+                 <div class="mt-8">
+                     <img src="robot-and-landmine.png" alt="AI-generated image of a robot disarming ordnance" class="rounded-xl shadow-lg border border-purple-500/20">
                 </div>
             </div>
         </section>
 
-        <!-- 4. Technical Information & AI -->
-        <section id="tech" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
-                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight">Introducing <span class="gradient-text">GLENN</span></h2>
+        <!-- 3. Technical Information & AI -->
+        <section id="tech" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
+                 <h2 class="text-4xl font-bold tracking-tight">Introducing <span class="gradient-text">GLENN</span></h2>
                  <p class="mt-4 text-lg text-slate-400">Gait Learning and Evaluation using Neural Networking</p>
             </div>
             <div class="grid md:grid-cols-2 gap-12 items-start">
-                 <div class="md:col-span-1 space-y-8">
-                    <div class="parallax">
-                        <img src="glenn-in-lab.png" alt="Technical Schematic of GLENN Robot" class="rounded-xl border border-slate-700 w-full">
-                    </div>
-                    <div class="parallax">
-                        <img src="engineer-and-robot-ai.png" alt="Engineer interacting with robot AI in a lab" class="rounded-xl border border-slate-700 w-full">
-                    </div>
+                 <div class="md:col-span-1 sticky top-24 space-y-8">
+                    <img src="glenn-in-lab.png" alt="Technical Schematic of GLENN Robot" class="rounded-xl border border-slate-700">
+                    <img src="engineer-and-robot-ai.png" alt="Engineer interacting with robot AI in a lab" class="rounded-xl border border-slate-700">
                 </div>
                 <div class="md:col-span-1 space-y-8">
-                    <div class="section-card p-8 card-3d">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">⚙️ Technical Specifications</h3>
-                        <p class="text-slate-300 leading-relaxed mb-4">
-                            GLENN uses a mix of synchronous and servo motors to control his limbs. Re-chargeable lithium-ion batteries supply 24 Volts to GLENN's system which powers 10+ synchronous cycloidal drive motors for his arms, legs, and core. A LattePanda 3 Delta computer with an external AI processor controls the entire robot system.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mt-6">
-                            <div class="bg-black/30 p-4 rounded-lg border border-sky-500/20">
-                                <div class="text-sky-400 font-bold text-sm">Power Supply</div>
-                                <div class="text-white text-lg">24V Li-Ion</div>
-                            </div>
-                            <div class="bg-black/30 p-4 rounded-lg border border-sky-500/20">
-                                <div class="text-sky-400 font-bold text-sm">Motors</div>
-                                <div class="text-white text-lg">10+ Cycloidal</div>
-                            </div>
-                            <div class="bg-black/30 p-4 rounded-lg border border-sky-500/20">
-                                <div class="text-sky-400 font-bold text-sm">Processor</div>
-                                <div class="text-white text-lg">LattePanda 3Δ</div>
-                            </div>
-                            <div class="bg-black/30 p-4 rounded-lg border border-sky-500/20">
-                                <div class="text-sky-400 font-bold text-sm">AI Accelerator</div>
-                                <div class="text-white text-lg">External GPU</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-card p-8 card-3d">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">🤖 AI Implementation</h3>
+                    <div class="section-card p-8">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text">Technical Information</h3>
                         <p class="text-slate-300 leading-relaxed">
-                            GLENN was trained using NVIDIA's Isaac Lab/Sim, a simulation and Reinforcement Learning (RL) training software that uses a complex Proximal Policy Optimization (PPO) algorithm to run thousands of iterations that help GLENN learn how to navigate through real world landscape. This trained policy is deployed onto the LattePanda 3 Delta which combined with the AI Accelerator create a bridge between the trained neural network and the hardware.
+                            GLENN uses a mix of synchronous and servo motors to control his limbs. Re-chargeable lithium-ion batteries supply 24 Volts to GLENN’s system which powers 10+ synchronous cycloidal drive motors for his arms, legs, and core. A LattePanda 3 Delta computer with an external AI processor controls the entire robot system.
                         </p>
-                        <div class="mt-6 flex items-center space-x-4">
-                            <div class="flex-1 bg-black/30 p-3 rounded-lg border border-purple-500/20 text-center">
-                                <div class="text-purple-400 font-bold text-xs">Training Platform</div>
-                                <div class="text-white text-sm">NVIDIA Isaac</div>
-                            </div>
-                            <div class="text-purple-400">→</div>
-                            <div class="flex-1 bg-black/30 p-3 rounded-lg border border-purple-500/20 text-center">
-                                <div class="text-purple-400 font-bold text-xs">Algorithm</div>
-                                <div class="text-white text-sm">PPO</div>
-                            </div>
-                            <div class="text-purple-400">→</div>
-                            <div class="flex-1 bg-black/30 p-3 rounded-lg border border-purple-500/20 text-center">
-                                <div class="text-purple-400 font-bold text-xs">Deployment</div>
-                                <div class="text-white text-sm">Hardware</div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="section-card p-8">
+                        <h3 class="text-2xl font-bold mb-3 gradient-text">AI Implementation</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            GLENN was trained using NVIDIA’s Isaac Lab/Sim, a simulation and Reinforcement Learning (RL) training software that uses a complex Proximal Policy Optimization (PPO) algorithm to run thousands of iterations that help GLENN learn how to navigate through real world landscape. This trained policy is deployed onto the LattePanda 3 Delta which combined with the AI Accelerator create a bridge between the trained neural network and the hardware.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Applications Section -->
-        <section id="applications" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
+        <!-- 4. Applications Section -->
+        <section id="applications" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold tracking-tight">An Adaptable Platform for Any <span class="gradient-text">Hazard</span></h2>
-                <p class="mt-4 text-slate-400 max-w-2xl mx-auto">GLENN's modular design allows rapid adaptation to diverse life-threatening scenarios</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                <div class="section-card p-8 text-center card-3d hover:border-red-500/30 transition-all">
-                    <div class="text-5xl mb-4">💣</div>
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Bomb Disposal</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-sky-400 mb-2">Bomb Disposal</h3>
                     <p class="text-sm text-slate-400">Safely disarm and manage explosive ordinances from a distance.</p>
                 </div>
-                <div class="section-card p-8 text-center card-3d hover:border-orange-500/30 transition-all">
-                    <div class="text-5xl mb-4">🚨</div>
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Disaster Response</h3>
+                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-sky-400 mb-2">Disaster Response</h3>
                     <p class="text-sm text-slate-400">Navigate unstable environments to search, rescue, and deliver aid.</p>
                 </div>
-                <div class="section-card p-8 text-center card-3d hover:border-yellow-500/30 transition-all">
-                    <div class="text-5xl mb-4">☢️</div>
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Hazardous Materials</h3>
+                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-sky-400 mb-2">Hazardous Materials</h3>
                     <p class="text-sm text-slate-400">Handle toxic or radioactive materials without human exposure.</p>
                 </div>
-                <div class="section-card p-8 text-center card-3d hover:border-purple-500/30 transition-all">
-                    <div class="text-5xl mb-4">🚀</div>
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Space Exploration</h3>
+                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
+                    <h3 class="text-lg font-bold text-sky-400 mb-2">Space Exploration</h3>
                     <p class="text-sm text-slate-400">Perform maintenance and exploration in extraterrestrial environments.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Video Section -->
-        <section id="videos" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
+        <!-- 5. Video Section -->
+        <section id="videos" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold tracking-tight">GLENN in <span class="gradient-text">Action</span></h2>
                 <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">See our technology at work. The following videos demonstrate GLENN's capabilities in real-world scenarios.</p>
             </div>
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <div class="section-card overflow-hidden video-container" onclick="openVideoModal('glenn-walking-demo.mp4')">
-                        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                            <source src="glenn-walking-demo.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-overlay">
-                            <div class="text-white text-6xl">▶️</div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h4 class="font-bold text-lg text-slate-200">Adaptive Locomotion Demo</h4>
-                        <p class="text-sm text-slate-400">GLENN navigating complex terrain</p>
-                    </div>
+                <!-- Video 1 -->
+                <div class="section-card aspect-video flex items-center justify-center p-4 overflow-hidden">
+                    <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
+                        <source src="glenn-walking-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
-                <div class="space-y-4">
-                    <div class="section-card overflow-hidden video-container" onclick="openVideoModal('glenn-durability-demo.mp4')">
-                        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                            <source src="glenn-durability-demo.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-overlay">
-                            <div class="text-white text-6xl">▶️</div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h4 class="font-bold text-lg text-slate-200">Durability Testing</h4>
-                        <p class="text-sm text-slate-400">Stress tests and recovery capabilities</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Development Roadmap (NEW) -->
-        <section id="roadmap" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold tracking-tight">Development <span class="gradient-text">Roadmap</span></h2>
-                <p class="mt-4 text-slate-400">Our journey from concept to deployment</p>
-            </div>
-            <div class="max-w-4xl mx-auto relative">
-                <div class="timeline-line"></div>
-                <div class="space-y-12">
-                    <div class="grid md:grid-cols-2 gap-8 items-center relative">
-                        <div class="timeline-dot" style="top: 50%;"></div>
-                        <div class="section-card p-6 md:text-right">
-                            <div class="text-sky-400 font-bold mb-2">Q4 2023 - Q1 2024</div>
-                            <h4 class="text-xl font-bold mb-2">✅ Concept & Foundation</h4>
-                            <p class="text-slate-400 text-sm">Initial design, securing advisors, entering NVA program</p>
-                        </div>
-                        <div></div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-8 items-center relative">
-                        <div class="timeline-dot" style="top: 50%;"></div>
-                        <div></div>
-                        <div class="section-card p-6">
-                            <div class="text-purple-400 font-bold mb-2">Q2 2024 - Present</div>
-                            <h4 class="text-xl font-bold mb-2">🔄 GLENN Development</h4>
-                            <p class="text-slate-400 text-sm">Hardware prototyping, AI training, locomotion testing</p>
-                        </div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-8 items-center relative">
-                        <div class="timeline-dot" style="top: 50%;"></div>
-                        <div class="section-card p-6 md:text-right border-sky-500/40">
-                            <div class="text-sky-400 font-bold mb-2">Q1 2025</div>
-                            <h4 class="text-xl font-bold mb-2">🎯 Field Testing</h4>
-                            <p class="text-slate-400 text-sm">EOD partnerships, real-world testing, refinement</p>
-                        </div>
-                        <div></div>
-                    </div>
-                    <div class="grid md:grid-cols-2 gap-8 items-center relative">
-                        <div class="timeline-dot" style="top: 50%;"></div>
-                        <div></div>
-                        <div class="section-card p-6 border-purple-500/40">
-                            <div class="text-purple-400 font-bold mb-2">Q3 2025</div>
-                            <h4 class="text-xl font-bold mb-2">🚀 Commercial Launch</h4>
-                            <p class="text-slate-400 text-sm">Production scaling, government contracts, multi-sector deployment</p>
-                        </div>
-                    </div>
+                <!-- Video 2 -->
+                <div class="section-card aspect-video flex items-center justify-center p-4 overflow-hidden">
+                    <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
+                        <source src="glenn-durability-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </div>
         </section>
         
-        <!-- 8. What Makes Us Unique -->
-        <section id="unique" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
+        <!-- 6. What Makes Us Unique -->
+        <section id="unique" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
                 <h2 class="text-4xl font-bold tracking-tight">The Moro Motion <span class="gradient-text">Advantage</span></h2>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="section-card p-8 text-center card-3d">
-                    <div class="text-5xl mb-4">🔧</div>
+                <div class="section-card p-8 text-center">
                     <h3 class="text-xl font-bold text-sky-400 mb-3">Modular Design</h3>
                     <p class="text-slate-400">Our unique design incorporates modularity into the humanoid robot, allowing for rapid adaptation and repair in the field.</p>
                 </div>
-                <div class="section-card p-8 text-center card-3d">
-                    <div class="text-5xl mb-4">⚡</div>
+                <div class="section-card p-8 text-center">
                     <h3 class="text-xl font-bold text-sky-400 mb-3">Rapid Prototyping</h3>
                     <p class="text-slate-400">We have the skills and in-house facilities to prototype quickly and make physical parts on the same day, accelerating development.</p>
                 </div>
-                <div class="section-card p-8 text-center card-3d">
-                    <div class="text-5xl mb-4">🤝</div>
+                <div class="section-card p-8 text-center">
                     <h3 class="text-xl font-bold text-sky-400 mb-3">Government Connections</h3>
                     <p class="text-slate-400">Our connections provide us with a direct pipeline into the Explosive Ordinance Disposal (EOD) market and other key sectors.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 9. Team Section -->
-        <section id="team" class="py-16 fade-in-section">
-            <div class="text-center mb-12">
+        <!-- 7. Team Section -->
+        <section id="team" class="py-8 fade-in-section">
+            <div class="text-center mb-8">
                  <h2 class="text-4xl font-bold tracking-tight">Our <span class="gradient-text">Team</span></h2>
-                 <p class="mt-4 text-slate-400">Driven by passion, guided by expertise</p>
             </div>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6 card-3d">
-                    <img class="w-32 h-32 rounded-full object-cover ring-4 ring-sky-500/50" src="jonah-moro.jpg" alt="Jonah Moro">
+                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
+                    <img class="w-28 h-28 rounded-full object-cover ring-2 ring-sky-500/50" src="jonah-moro.jpg" alt="Jonah Moro">
                     <div>
                         <h4 class="text-2xl font-bold">Jonah Moro</h4>
-                        <p class="text-sky-400 text-lg font-semibold">Founder</p>
-                        <p class="text-slate-400">Computer Engineering</p>
-                        <p class="text-slate-500 text-sm">Auburn University</p>
+                        <p class="text-sky-400 text-lg">Founder</p>
+                        <p class="text-slate-400">Computer Engineering, Auburn University</p>
                     </div>
                 </div>
-                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6 card-3d">
-                    <img class="w-32 h-32 rounded-full object-cover ring-4 ring-purple-500/50" src="sebastian-torres.jpg" alt="Sebastian Torres Urzua">
+                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
+                    <img class="w-28 h-28 rounded-full object-cover ring-2 ring-purple-500/50" src="sebastian-torres.jpg" alt="Sebastian Torres Urzua">
                     <div>
                         <h4 class="text-2xl font-bold">Sebastian Torres Urzua</h4>
-                        <p class="text-purple-400 text-lg font-semibold">Co-Founder</p>
-                        <p class="text-slate-400">Computer Engineering</p>
-                        <p class="text-slate-500 text-sm">Auburn University</p>
+                        <p class="text-purple-400 text-lg">Co-Founder</p>
+                        <p class="text-slate-400">Computer Engineering, Auburn University</p>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-12 section-card max-w-4xl mx-auto p-8">
-                <h4 class="text-2xl font-bold text-slate-200 mb-4">Advisory Board & Support</h4>
-                <p class="text-slate-400 max-w-2xl mx-auto mb-8">
+            <div class="text-center mt-8 section-card max-w-4xl mx-auto p-8">
+                <h4 class="text-2xl font-bold text-slate-200 mb-2">Advisory Board & Support</h4>
+                <p class="text-slate-400 max-w-2xl mx-auto">
                     Guided by 5 expert Entrepreneurs in Residence (EIRs) from the New Venture Accelerator, and proud of our roots at Auburn University.
                 </p>
-                <div class="flex justify-center items-center space-x-8 md:space-x-12">
+                <div class="flex justify-center items-center space-x-8 md:space-x-12 mt-6">
                     <img src="auburn-university-logo.png" alt="Auburn University Logo" class="h-16 filter invert opacity-80 hover:opacity-100 transition-opacity">
                     <img src="nva-logo.jpg" alt="New Venture Accelerator Logo" class="h-12 filter invert opacity-80 hover:opacity-100 transition-opacity">
                 </div>
             </div>
         </section>
 
-        <!-- 10. Newsletter Signup (NEW) -->
-        <section class="py-16 fade-in-section">
-            <div class="max-w-2xl mx-auto text-center section-card p-12">
-                <h2 class="text-3xl font-bold mb-4">Stay <span class="gradient-text">Updated</span></h2>
-                <p class="text-slate-400 mb-8">Join our newsletter to receive the latest updates on GLENN's development and deployment.</p>
-                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 bg-black/50 border border-white/10 rounded-lg focus:outline-none focus:border-sky-500 text-white" required>
-                    <button type="submit" class="bg-sky-500 text-white font-bold px-8 py-3 rounded-lg hover:bg-sky-600 transition-colors whitespace-nowrap">Subscribe</button>
-                </form>
-                <p id="newsletter-message" class="mt-4 text-sm text-slate-400"></p>
-            </div>
-        </section>
-
-        <!-- 11. Contact Section -->
-        <section id="contact" class="py-16 text-center fade-in-section">
+        <!-- 8. Contact Section -->
+        <section id="contact" class="py-8 text-center fade-in-section">
              <h2 class="text-4xl font-bold tracking-tight mb-4">Join Us in Building a <span class="gradient-text">Safer Future</span></h2>
              <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-8">We're looking for partners, investors, and talent to accelerate our mission. If you're passionate about the future of robotics, we'd love to hear from you.</p>
-             <a href="mailto:contact@moromotion.com" class="inline-block bg-sky-500 text-white font-bold py-4 px-10 rounded-lg hover:bg-sky-600 transition-all hover:scale-105 shadow-lg shadow-sky-500/20">Get in Touch</a>
+             <a href="mailto:contact@moromotion.com" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-600 transition-colors">Get in Touch</a>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 mt-16">
-        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+    <footer class="border-t border-slate-800 mt-8">
+        <div class="container mx-auto px-6 py-6 text-center text-slate-500">
             <p>&copy; 2024 Moro Motion. All rights reserved.</p>
-            <div class="mt-4 flex justify-center space-x-6 text-sm">
-                <a href="#" class="hover:text-sky-400 transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-sky-400 transition-colors">Terms of Service</a>
-                <a href="mailto:contact@moromotion.com" class="hover:text-sky-400 transition-colors">Contact</a>
-            </div>
         </div>
     </footer>
-
-    <!-- Video Modal -->
-    <div id="video-modal" class="modal">
-        <div class="relative w-full max-w-5xl mx-auto p-4">
-            <button onclick="closeVideoModal()" class="absolute top-8 right-8 text-white text-4xl hover:text-sky-400 transition-colors z-10">&times;</button>
-            <video id="modal-video" class="w-full rounded-xl" controls>
-                <source src="" type="video/mp4">
-            </video>
-        </div>
-    </div>
 
     <script>
         // Mobile menu toggle
@@ -560,14 +291,6 @@
                 mobileMenu.classList.add('hidden');
             });
         }
-        
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scroll-progress').style.width = scrolled + '%';
-        });
         
         // Glow effect follow mouse
         document.addEventListener('mousemove', (e) => {
@@ -592,93 +315,6 @@
         sections.forEach(section => {
             observer.observe(section);
         });
-
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
-            parallaxElements.forEach((el, index) => {
-                const speed = 0.1 + (index * 0.05);
-                el.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // 3D card tilt effect
-        document.querySelectorAll('.card-3d').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-
-        // Animated counters
-        const counters = document.querySelectorAll('[data-count]');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = parseInt(counter.getAttribute('data-count'));
-                    const duration = 2000;
-                    const step = target / (duration / 16);
-                    let current = 0;
-                    const timer = setInterval(() => {
-                        current += step;
-                        if (current >= target) {
-                            counter.textContent = target + (target === 100 ? 'K+' : '+');
-                            clearInterval(timer);
-                        } else {
-                            counter.textContent = Math.floor(current);
-                        }
-                    }, 16);
-                    counterObserver.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => counterObserver.observe(counter));
-
-        // Video modal functions
-        function openVideoModal(videoSrc) {
-            const modal = document.getElementById('video-modal');
-            const video = document.getElementById('modal-video');
-            video.src = videoSrc;
-            modal.classList.add('active');
-            video.play();
-        }
-
-        function closeVideoModal() {
-            const modal = document.getElementById('video-modal');
-            const video = document.getElementById('modal-video');
-            modal.classList.remove('active');
-            video.pause();
-            video.src = '';
-        }
-
-        // Newsletter form
-        document.getElementById('newsletter-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const message = document.getElementById('newsletter-message');
-            message.textContent = '✅ Thanks for subscribing! We\'ll keep you updated.';
-            message.classList.add('text-sky-400');
-            e.target.reset();
-        });
-
-        // Typing cursor animation
-        setInterval(() => {
-            const cursor = document.querySelector('.typing-cursor');
-            if (cursor) {
-                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-            }
-        }, 500);
     </script>
 </body>
 </html>
