@@ -3,319 +3,989 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moro Motion | The Future of Robotics</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>MORO MOTION | Humanoid Robotics for Extreme Environments</title>
+    <meta name="description" content="Engineering humanoid robots that save lives in the world's most dangerous environments.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #0a0e27;
+            --color-surface: #141b3a;
+            --color-elevated: #1a2340;
+            --color-text: #e8edf5;
+            --color-text-muted: #8b95b0;
+            --color-primary: #00fff5;
+            --color-secondary: #ff6b35;
+            --color-accent: #7c3aed;
+            --color-border: rgba(0, 255, 245, 0.15);
+            --color-glow: rgba(0, 255, 245, 0.3);
+            --gradient-primary: linear-gradient(135deg, #00fff5, #00d4ff);
+            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ff9a76);
+            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+        }
+
+        [data-theme="light"] {
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-elevated: #f1f5f9;
+            --color-text: #0f172a;
+            --color-text-muted: #475569;
+            --color-primary: #0891b2;
+            --color-secondary: #ea580c;
+            --color-accent: #7c3aed;
+            --color-border: rgba(8, 145, 178, 0.2);
+            --color-glow: rgba(8, 145, 178, 0.15);
+            --gradient-primary: linear-gradient(135deg, #0891b2, #06b6d4);
+            --gradient-secondary: linear-gradient(135deg, #ea580c, #f97316);
+            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            color: #e2e8f0;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
-        .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--color-primary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-primary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
         }
-        .section-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite;
         }
-        .glow-effect {
-            position: absolute;
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--gradient-primary);
+            top: -300px;
+            right: -200px;
+        }
+
+        .orb-2 {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent 70%);
-            pointer-events: none;
-            z-index: -1;
-            transition: all 1s ease-in-out;
+            background: var(--gradient-secondary);
+            bottom: -250px;
+            left: 50%;
+            animation-delay: 8s;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--gradient-accent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 15s;
         }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(80px, -80px) scale(1.1); }
+            66% { transform: translate(-80px, 80px) scale(0.9); }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #38bdf8;
-            border-radius: 4px;
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0ea5e9;
+
+        [data-theme="light"] header {
+            background: rgba(255, 255, 255, 0.7);
         }
-        
-        /* Animation for scroll */
-        .fade-in-section {
+
+        header.scrolled {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-text);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--color-elevated);
+            border-color: var(--color-secondary);
+            transform: rotate(180deg);
+        }
+
+        .mobile-theme-toggle {
+            display: none;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #0a0e27;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 255, 245, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--color-secondary);
+            color: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary);
+            color: #ffffff;
+        }
+
+        .hero {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10rem 2rem 6rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .visual-container {
+            position: relative;
+            aspect-ratio: 1;
+            background: var(--color-surface);
+            border: 2px solid var(--color-secondary);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .visual-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            box-shadow: 0 0 20px var(--color-secondary);
+            animation: scan 3s ease-in-out infinite;
+            top: 0;
+            left: 0;
+        }
+
+        @keyframes scan {
+            0%, 100% { top: 0%; opacity: 0; }
+            50% { top: 100%; opacity: 1; }
+        }
+
+        .stats-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 245, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'IBM Plex Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .mission-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .section-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .mission-content p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .mission-image {
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 24px;
+            overflow: hidden;
+            height: 500px;
+        }
+
+        .mission-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .applications-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .app-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-secondary);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .app-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .app-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--color-secondary);
+            box-shadow: 0 24px 48px rgba(255, 107, 53, 0.3);
+        }
+
+        .app-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            color: var(--color-secondary);
+        }
+
+        .app-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-card p {
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-container {
+            background: var(--color-surface);
+            border: 2px solid var(--color-secondary);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2);
+        }
+
+        .cta-container h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-container p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand p {
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--color-border);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 8rem;
+            }
+
+            .mission-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-theme-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 1.25rem 2rem;
+                font-size: 0.875rem;
+            }
+
+            .visual-container {
+                max-height: 400px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .mission-section {
+                padding: 0 1.5rem;
+            }
+
+            .mission-image {
+                height: 350px;
+            }
+
+            .section-label {
+                font-size: 0.75rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .applications-section {
+                padding: 0 1.5rem;
+            }
+
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-card {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-section {
+                padding: 0 1.5rem;
+            }
+
+            .cta-container {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .cta-container h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-container p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 7rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .mission-image {
+                height: 280px;
+            }
+
+            .app-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        .reveal {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: all 0.5s ease-out;
         }
-        .fade-in-section.is-visible {
+
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
-<body class="antialiased relative overflow-x-hidden">
+<body>
+    <div class="grid-background"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-    <!-- Glow effects for background -->
-    <div id="glow1" class="glow-effect top-0 left-0"></div>
-    <div id="glow2" class="glow-effect bottom-0 right-0 rotate-180"></div>
-
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
-        <div class="container mx-auto px-6 py-4">
-            <nav class="flex items-center justify-between">
-                <a href="#" class="text-2xl font-bold tracking-tighter">MORO <span class="gradient-text">MOTION</span></a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#mission" class="text-slate-300 hover:text-sky-400 transition-colors">Mission</a>
-                    <a href="#applications" class="text-slate-300 hover:text-sky-400 transition-colors">Applications</a>
-                    <a href="#tech" class="text-slate-300 hover:text-sky-400 transition-colors">Technology</a>
-                    <a href="#team" class="text-slate-300 hover:text-sky-400 transition-colors">Team</a>
-                    <a href="#contact" class="text-slate-300 hover:text-sky-400 transition-colors">Contact</a>
-                </div>
-                <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </nav>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/50">
-             <a href="#mission" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Mission</a>
-             <a href="#applications" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Applications</a>
-             <a href="#tech" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Technology</a>
-             <a href="#team" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Team</a>
-             <a href="#contact" class="block py-2 px-6 text-slate-300 hover:bg-sky-900/50">Contact</a>
-        </div>
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo">MORO MOTION</a>
+            <ul class="nav-menu">
+                <li><a href="coming-soon.html">Specs</a></li>
+                <li><a href="coming-soon.html">Resources</a></li>
+                <li><a href="coming-soon.html">News</a></li>
+                <li><a href="coming-soon.html">Investors</a></li>
+                <li><button class="theme-toggle" id="theme-toggle">◐</button></li>
+            </ul>
+            <button class="theme-toggle mobile-theme-toggle" id="mobile-theme-toggle">◐</button>
+        </nav>
     </header>
 
-    <main class="container mx-auto px-6">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Engineering Humanoid Robots for Humanity's<br>
+                <span class="gradient-text">Toughest Challenges</span>
+            </h1>
+            <p class="hero-subtitle">
+                Building adaptive humanoid robots that operate in the world's most dangerous environments—so humans don't have to.
+            </p>
+            <div class="hero-cta">
+                <a href="coming-soon.html" class="btn btn-primary">Explore GLENN</a>
+                <a href="coming-soon.html" class="btn btn-secondary">Request Demo</a>
+            </div>
+        </div>
 
-        <!-- 1. Hero Section -->
-        <section class="text-center min-h-[80vh] flex flex-col justify-center items-center pt-32 pb-10">
-            <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Engineering for Humanity's<br> <span class="gradient-text">Toughest Challenges</span></h1>
-            <p class="max-w-3xl mx-auto text-lg text-slate-400 mb-8">We build adaptable humanoid robots to perform the world's most dangerous jobs, so humans don't have to.</p>
-            <div class="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl shadow-sky-500/10 border border-sky-500/20 overflow-hidden">
-                 <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+        <div class="hero-visual">
+            <div class="visual-container">
+                <video autoplay loop muted playsinline>
                     <source src="hero-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
+                <div class="scan-line"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- 2. Mission Section -->
-        <section id="mission" class="py-8 fade-in-section">
-            <div class="max-w-4xl mx-auto text-center">
-                <div class="section-card p-8 md:p-10">
-                    <h2 class="text-3xl font-bold mb-4 gradient-text">A New Frontier for Safety</h2>
-                    <p class="text-slate-300 leading-relaxed">
-                        Moro Motion’s mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments—from disaster response and bomb disposal to space exploration. By merging human intuition with robotic resilience, we are building a safer future.
-                    </p>
-                </div>
-                 <div class="mt-8">
-                     <img src="robot-and-landmine.png" alt="AI-generated image of a robot disarming ordnance" class="rounded-xl shadow-lg border border-purple-500/20">
-                </div>
+    <section class="stats-section reveal">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">180<span style="font-size: 2rem;">cm</span></div>
+                <div class="stat-label">Height</div>
             </div>
-        </section>
+            <div class="stat-card">
+                <div class="stat-number">28</div>
+                <div class="stat-label">Degrees of Freedom</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15<span style="font-size: 2rem;">kg</span></div>
+                <div class="stat-label">Payload Capacity</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2-4<span style="font-size: 2rem;">hr</span></div>
+                <div class="stat-label">Battery Life</div>
+            </div>
+        </div>
+    </section>
 
-        <!-- 3. Technical Information & AI -->
-        <section id="tech" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                 <h2 class="text-4xl font-bold tracking-tight">Introducing <span class="gradient-text">GLENN</span></h2>
-                 <p class="mt-4 text-lg text-slate-400">Gait Learning and Evaluation using Neural Networking</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-start">
-                 <div class="md:col-span-1 sticky top-24 space-y-8">
-                    <img src="glenn-in-lab.png" alt="Technical Schematic of GLENN Robot" class="rounded-xl border border-slate-700">
-                    <img src="engineer-and-robot-ai.png" alt="Engineer interacting with robot AI in a lab" class="rounded-xl border border-slate-700">
-                </div>
-                <div class="md:col-span-1 space-y-8">
-                    <div class="section-card p-8">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">Technical Information</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            GLENN uses a mix of synchronous and servo motors to control his limbs. Re-chargeable lithium-ion batteries supply 24 Volts to GLENN’s system which powers 10+ synchronous cycloidal drive motors for his arms, legs, and core. A LattePanda 3 Delta computer with an external AI processor controls the entire robot system.
-                        </p>
-                    </div>
-                    <div class="section-card p-8">
-                        <h3 class="text-2xl font-bold mb-3 gradient-text">AI Implementation</h3>
-                        <p class="text-slate-300 leading-relaxed">
-                            GLENN was trained using NVIDIA’s Isaac Lab/Sim, a simulation and Reinforcement Learning (RL) training software that uses a complex Proximal Policy Optimization (PPO) algorithm to run thousands of iterations that help GLENN learn how to navigate through real world landscape. This trained policy is deployed onto the LattePanda 3 Delta which combined with the AI Accelerator create a bridge between the trained neural network and the hardware.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Applications Section -->
-        <section id="applications" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold tracking-tight">An Adaptable Platform for Any <span class="gradient-text">Hazard</span></h2>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">Bomb Disposal</h3>
-                    <p class="text-sm text-slate-400">Safely disarm and manage explosive ordinances from a distance.</p>
-                </div>
-                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">Disaster Response</h3>
-                    <p class="text-sm text-slate-400">Navigate unstable environments to search, rescue, and deliver aid.</p>
-                </div>
-                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">Hazardous Materials</h3>
-                    <p class="text-sm text-slate-400">Handle toxic or radioactive materials without human exposure.</p>
-                </div>
-                <div class="section-card p-6 text-center aspect-square flex flex-col justify-center">
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">Space Exploration</h3>
-                    <p class="text-sm text-slate-400">Perform maintenance and exploration in extraterrestrial environments.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Video Section -->
-        <section id="videos" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold tracking-tight">GLENN in <span class="gradient-text">Action</span></h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-400">See our technology at work. The following videos demonstrate GLENN's capabilities in real-world scenarios.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Video 1 -->
-                <div class="section-card aspect-video flex items-center justify-center p-4 overflow-hidden">
-                    <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
-                        <source src="glenn-walking-demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <!-- Video 2 -->
-                <div class="section-card aspect-video flex items-center justify-center p-4 overflow-hidden">
-                    <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
-                        <source src="glenn-durability-demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 6. What Makes Us Unique -->
-        <section id="unique" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold tracking-tight">The Moro Motion <span class="gradient-text">Advantage</span></h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Modular Design</h3>
-                    <p class="text-slate-400">Our unique design incorporates modularity into the humanoid robot, allowing for rapid adaptation and repair in the field.</p>
-                </div>
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Rapid Prototyping</h3>
-                    <p class="text-slate-400">We have the skills and in-house facilities to prototype quickly and make physical parts on the same day, accelerating development.</p>
-                </div>
-                <div class="section-card p-8 text-center">
-                    <h3 class="text-xl font-bold text-sky-400 mb-3">Government Connections</h3>
-                    <p class="text-slate-400">Our connections provide us with a direct pipeline into the Explosive Ordinance Disposal (EOD) market and other key sectors.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Team Section -->
-        <section id="team" class="py-8 fade-in-section">
-            <div class="text-center mb-8">
-                 <h2 class="text-4xl font-bold tracking-tight">Our <span class="gradient-text">Team</span></h2>
-            </div>
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
-                    <img class="w-28 h-28 rounded-full object-cover ring-2 ring-sky-500/50" src="jonah-moro.jpg" alt="Jonah Moro">
-                    <div>
-                        <h4 class="text-2xl font-bold">Jonah Moro</h4>
-                        <p class="text-sky-400 text-lg">Founder</p>
-                        <p class="text-slate-400">Computer Engineering, Auburn University</p>
-                    </div>
-                </div>
-                <div class="section-card p-8 flex flex-col md:flex-row items-center text-center md:text-left space-y-4 md:space-y-0 md:space-x-6">
-                    <img class="w-28 h-28 rounded-full object-cover ring-2 ring-purple-500/50" src="sebastian-torres.jpg" alt="Sebastian Torres Urzua">
-                    <div>
-                        <h4 class="text-2xl font-bold">Sebastian Torres Urzua</h4>
-                        <p class="text-purple-400 text-lg">Co-Founder</p>
-                        <p class="text-slate-400">Computer Engineering, Auburn University</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-8 section-card max-w-4xl mx-auto p-8">
-                <h4 class="text-2xl font-bold text-slate-200 mb-2">Advisory Board & Support</h4>
-                <p class="text-slate-400 max-w-2xl mx-auto">
-                    Guided by 5 expert Entrepreneurs in Residence (EIRs) from the New Venture Accelerator, and proud of our roots at Auburn University.
+    <section class="mission-section reveal">
+        <div class="mission-container">
+            <div class="mission-content">
+                <div class="section-label">[ OUR MISSION ]</div>
+                <h2>
+                    A New Frontier for <span class="gradient-text">Safety</span>
+                </h2>
+                <p>
+                    Moro Motion's mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments.
                 </p>
-                <div class="flex justify-center items-center space-x-8 md:space-x-12 mt-6">
-                    <img src="auburn-university-logo.png" alt="Auburn University Logo" class="h-16 filter invert opacity-80 hover:opacity-100 transition-opacity">
-                    <img src="nva-logo.jpg" alt="New Venture Accelerator Logo" class="h-12 filter invert opacity-80 hover:opacity-100 transition-opacity">
+                <p>
+                    From disaster response and bomb disposal to space exploration, we're building humanoid robots as an adaptable platform that merges human intuition with robotic resilience.
+                </p>
+            </div>
+            <div class="mission-image">
+                <img src="robot-and-landmine.png" alt="GLENN Robot near landmine">
+            </div>
+        </div>
+    </section>
+
+    <section class="applications-section reveal">
+        <div class="section-header">
+            <h2>Built for <span class="gradient-text">Extreme Environments</span></h2>
+            <p>One adaptable platform for humanity's most dangerous work</p>
+        </div>
+        <div class="applications-grid">
+            <div class="app-card">
+                <div class="app-icon">⬢</div>
+                <h3>Bomb Disposal</h3>
+                <p>Safely disarm and manage explosive ordnances from a distance, protecting EOD personnel from life-threatening situations.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">⚡</div>
+                <h3>Disaster Response</h3>
+                <p>Navigate unstable environments to search, rescue, and deliver aid where human access is impossible or too dangerous.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">◉</div>
+                <h3>Hazardous Materials</h3>
+                <p>Handle toxic or radioactive materials without human exposure, ensuring safety in chemical and nuclear facilities.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">✦</div>
+                <h3>Space Exploration</h3>
+                <p>Perform maintenance and exploration in extraterrestrial environments where human presence is limited or impossible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section reveal">
+        <div class="cta-container">
+            <h2>Ready to Learn More About <span class="gradient-text">GLENN</span>?</h2>
+            <p>Discover detailed specifications, request a demo, or explore our comprehensive resources</p>
+            <div class="cta-buttons">
+                <a href="coming-soon.html" class="btn btn-primary">View Specifications</a>
+                <a href="coming-soon.html" class="btn btn-secondary">Browse Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">MORO MOTION</div>
+                <p>Engineering safer futures through humanoid robotics for extreme environments.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <div class="footer-links">
+                    <a href="coming-soon.html">Specifications</a>
+                    <a href="coming-soon.html">Resources</a>
                 </div>
             </div>
-        </section>
-
-        <!-- 8. Contact Section -->
-        <section id="contact" class="py-8 text-center fade-in-section">
-             <h2 class="text-4xl font-bold tracking-tight mb-4">Join Us in Building a <span class="gradient-text">Safer Future</span></h2>
-             <p class="max-w-2xl mx-auto text-lg text-slate-400 mb-8">We're looking for partners, investors, and talent to accelerate our mission. If you're passionate about the future of robotics, we'd love to hear from you.</p>
-             <a href="mailto:contact@moromotion.com" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-600 transition-colors">Get in Touch</a>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 mt-8">
-        <div class="container mx-auto px-6 py-6 text-center text-slate-500">
-            <p>&copy; 2025 Moro Motion. All rights reserved.</p>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <div class="footer-links">
+                    <a href="coming-soon.html">News</a>
+                    <a href="coming-soon.html">Investors</a>
+                    <a href="index.html">About</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="footer-links">
+                    <a href="/cdn-cgi/l/email-protection#583b37362c393b2c1835372a3735372c313736763b3735">Contact</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Moro Motion. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
-        for (let i = 0; i < mobileMenuLinks.length; i++) {
-            mobileMenuLinks[i].addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            const toggle = document.getElementById('theme-toggle');
+            const mobileToggle = document.getElementById('mobile-theme-toggle');
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            const icon = newTheme === 'light' ? '◐' : '○';
+            toggle.textContent = icon;
+            mobileToggle.textContent = icon;
         }
-        
-        // Glow effect follow mouse
-        document.addEventListener('mousemove', (e) => {
-            const glow1 = document.getElementById('glow1');
-            const glow2 = document.getElementById('glow2');
-            const x = e.clientX;
-            const y = e.clientY;
-            glow1.style.transform = `translate(${x - 250}px, ${y - 250}px)`;
-            glow2.style.transform = `translate(${-x + window.innerWidth - 250}px, ${-y + window.innerHeight - 250}px) rotate(180deg)`;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const icon = savedTheme === 'light' ? '◐' : '○';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-toggle').textContent = icon;
+            document.getElementById('mobile-theme-toggle').textContent = icon;
         });
 
-        // Fade in sections on scroll
-        const sections = document.querySelectorAll('.fade-in-section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal:not(.active)');
+            reveals.forEach((element, index) => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 50;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, index * 100);
                 }
             });
-        }, { threshold: 0.1 });
+        };
 
-        sections.forEach(section => {
-            observer.observe(section);
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    reveal();
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
+        window.addEventListener('load', reveal);
+        setTimeout(reveal, 100);
     </script>
 </body>
 </html>
-
