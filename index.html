@@ -907,6 +907,34 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            align-items: stretch;
+        }
+
+        .hardware-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Desktop: the stacked column fills the tall card's height, split into two equal cards */
+        @media (min-width: 769px) {
+            .hardware-col {
+                height: 100%;
+            }
+
+            .hardware-col .hardware-card {
+                flex: 1 1 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+            }
+
+            .hardware-col .hardware-media {
+                flex: 1 1 0;
+                aspect-ratio: auto;
+                min-height: 0;
+                object-fit: cover;
+            }
         }
 
         .hardware-card {
@@ -929,6 +957,11 @@
             object-fit: cover;
             display: block;
             background: var(--color-elevated);
+        }
+
+        /* Portrait shot: fills its frame at native ratio — full body, no letterbox */
+        .hardware-media--tall {
+            aspect-ratio: 2 / 3;
         }
 
         .hardware-caption {
@@ -1159,26 +1192,27 @@
         </div>
         <div class="hardware-grid">
             <div class="hardware-card">
-                <img class="hardware-media" src="glenn-in-lab.jpg" alt="GLENN prototype on its test stand in the Moro Motion lab">
+                <img class="hardware-media hardware-media--tall" src="current-prototype-web.jpg" alt="Current GLENN prototype — custom actuators, drivetrain, and wiring">
                 <div class="hardware-caption">
                     <h3>In the Lab</h3>
-                    <p>The current prototype on its test rig — real actuators, real electronics.</p>
+                    <p>The current prototype — real actuators, real electronics.</p>
                 </div>
             </div>
-            <!-- TODO: second prototype photo — replace src with the picture you pick, and edit the caption.
-            <div class="hardware-card">
-                <img class="hardware-media" src="REPLACE-WITH-PHOTO.jpg" alt="GLENN prototype">
-                <div class="hardware-caption">
-                    <h3>Prototype Detail</h3>
-                    <p>Short caption for this shot.</p>
+            <div class="hardware-col">
+                <div class="hardware-card">
+                    <img class="hardware-media" src="glenn-cad-model.jpg" alt="Full-body CAD model of the GLENN humanoid robot">
+                    <div class="hardware-caption">
+                        <h3>Full-Body Design</h3>
+                        <p>The complete 26-DOF platform engineered for a 5 ft, 40 lb frame.</p>
+                    </div>
                 </div>
-            </div>
-            -->
-            <div class="hardware-card">
-                <img class="hardware-media" src="glenn-cad-model.jpg" alt="Full-body CAD model of the GLENN humanoid robot">
-                <div class="hardware-caption">
-                    <h3>Full-Body Design</h3>
-                    <p>The complete 26-DOF platform engineered for a 5 ft, 40 lb frame.</p>
+                <!-- TODO: swap src for the second photo you want here. -->
+                <div class="hardware-card">
+                    <img class="hardware-media" src="glenn-in-lab.jpg" alt="GLENN prototype on its test stand">
+                    <div class="hardware-caption">
+                        <h3>On the Bench</h3>
+                        <p>Iterating on the drivetrain and control stack in the lab.</p>
+                    </div>
                 </div>
             </div>
         </div>

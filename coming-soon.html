@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coming Soon | MORO MOTION</title>
     <meta name="description" content="This page is currently under development.">
+    <link rel="icon" type="image/png" href="moromotion-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,36 +16,43 @@
             box-sizing: border-box;
         }
 
+        /* Monochrome brand palette + signal amber accent (matches index.html) */
         :root {
-            --color-bg: #0a0e27;
-            --color-surface: #141b3a;
-            --color-elevated: #1a2340;
-            --color-text: #e8edf5;
-            --color-text-muted: #8b95b0;
-            --color-primary: #00fff5;
-            --color-secondary: #ff6b35;
-            --color-accent: #7c3aed;
-            --color-border: rgba(0, 255, 245, 0.15);
-            --color-glow: rgba(0, 255, 245, 0.3);
-            --gradient-primary: linear-gradient(135deg, #00fff5, #00d4ff);
-            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ff9a76);
-            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --color-bg: #000000;
+            --color-surface: #111111;
+            --color-elevated: #1c1c1c;
+            --color-text: #ffffff;
+            --color-text-muted: #b2b2b2;
+            --color-primary: #ffffff;
+            --color-secondary: #b2b2b2;
+            --color-accent: #8a8a8a;
+            --color-border: rgba(255, 255, 255, 0.14);
+            --color-glow: rgba(255, 255, 255, 0.18);
+            --color-signal: #ffb400;
+            --signal-glow: rgba(255, 180, 0, 0.35);
+            --gradient-primary: linear-gradient(135deg, #ffffff, #b2b2b2);
+            --gradient-secondary: linear-gradient(135deg, #e6e6e6, #8a8a8a);
+            --gradient-accent: linear-gradient(135deg, #cfcfcf, #7a7a7a);
+            --gradient-signal: linear-gradient(135deg, #ffc94d, #ff9500);
         }
 
         [data-theme="light"] {
             --color-bg: #ffffff;
-            --color-surface: #f8fafc;
-            --color-elevated: #f1f5f9;
-            --color-text: #0f172a;
-            --color-text-muted: #475569;
-            --color-primary: #0891b2;
-            --color-secondary: #ea580c;
-            --color-accent: #7c3aed;
-            --color-border: rgba(8, 145, 178, 0.2);
-            --color-glow: rgba(8, 145, 178, 0.15);
-            --gradient-primary: linear-gradient(135deg, #0891b2, #06b6d4);
-            --gradient-secondary: linear-gradient(135deg, #ea580c, #f97316);
-            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --color-surface: #f4f4f4;
+            --color-elevated: #e9e9e9;
+            --color-text: #000000;
+            --color-text-muted: #5f5f5f;
+            --color-primary: #000000;
+            --color-secondary: #6b6b6b;
+            --color-accent: #8a8a8a;
+            --color-border: rgba(0, 0, 0, 0.12);
+            --color-glow: rgba(0, 0, 0, 0.10);
+            --color-signal: #c77f00;
+            --signal-glow: rgba(199, 127, 0, 0.28);
+            --gradient-primary: linear-gradient(135deg, #000000, #6b6b6b);
+            --gradient-secondary: linear-gradient(135deg, #333333, #8a8a8a);
+            --gradient-accent: linear-gradient(135deg, #555555, #999999);
+            --gradient-signal: linear-gradient(135deg, #e0940a, #c77f00);
         }
 
         body {
@@ -127,7 +135,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 14, 39, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--color-border);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -155,6 +163,23 @@
             color: var(--color-text);
         }
 
+        .logo-img {
+            height: 38px;
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            transition: filter 0.4s ease;
+        }
+
+        [data-theme="light"] .logo-img {
+            filter: none;
+        }
+
+        .footer-brand .logo-img {
+            height: 34px;
+            margin-bottom: 1rem;
+        }
+
         .nav-menu {
             display: flex;
             gap: 3rem;
@@ -178,7 +203,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
+            background: var(--gradient-signal);
             transition: width 0.3s ease;
         }
 
@@ -206,7 +231,7 @@
 
         .theme-toggle:hover {
             background: var(--color-elevated);
-            border-color: var(--color-secondary);
+            border-color: var(--color-signal);
             transform: rotate(180deg);
         }
 
@@ -288,7 +313,7 @@
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--color-secondary);
+            color: var(--color-signal);
             margin-bottom: 2rem;
             font-family: 'IBM Plex Mono', monospace;
         }
@@ -296,7 +321,7 @@
         .status-dot {
             width: 8px;
             height: 8px;
-            background: var(--color-secondary);
+            background: var(--color-signal);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -315,7 +340,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            background: var(--gradient-signal);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -363,7 +388,7 @@
             display: inline-block;
             padding: 1rem 2rem;
             background: var(--gradient-primary);
-            color: #0a0e27;
+            color: var(--color-bg);
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
@@ -375,7 +400,7 @@
 
         .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 255, 245, 0.3);
+            box-shadow: 0 8px 24px var(--signal-glow);
         }
 
 
@@ -425,7 +450,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--color-secondary);
+            color: var(--color-signal);
         }
 
         .footer-bottom {
@@ -561,7 +586,7 @@
 
     <header>
         <nav>
-            <a href="index.html" class="logo">MORO MOTION</a>
+            <a href="index.html" class="logo"><img class="logo-img" src="moromotion-logo.png" alt="Moro Motion"></a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="coming-soon.html">Specs</a></li>
                 <li><a href="coming-soon.html">Resources</a></li>
@@ -611,7 +636,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo">MORO MOTION</div>
+                <img class="logo-img" src="moromotion-logo.png" alt="Moro Motion">
                 <p>Engineering safer futures through humanoid robotics for extreme environments.</p>
             </div>
             <div class="footer-section">
@@ -639,7 +664,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Moro Motion. All rights reserved.</p>
+            <p>© 2026 Moro Motion. All rights reserved.</p>
         </div>
     </footer>
 
