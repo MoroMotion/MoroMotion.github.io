@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MORO MOTION | Humanoid Robotics for Extreme Environments</title>
     <meta name="description" content="Engineering humanoid robots that save lives in the world's most dangerous environments.">
+    <link rel="icon" type="image/png" href="moromotion-logo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Moro Motion | Humanoid Robots for Extreme Environments">
+    <meta property="og:description" content="Adaptive humanoid robots that operate in the world's most dangerous environments—so humans don't have to. Meet GLENN.">
+    <meta property="og:image" content="glenn-in-lab.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Moro Motion | Humanoid Robots for Extreme Environments">
+    <meta name="twitter:description" content="Meet GLENN — an adaptive humanoid robot built for bomb disposal, disaster response, and other life-threatening work.">
+    <meta name="twitter:image" content="glenn-in-lab.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,36 +24,43 @@
             box-sizing: border-box;
         }
 
+        /* Monochrome brand palette — #000000 / #ffffff / #b2b2b2 (Moro Motion brand kit) */
         :root {
-            --color-bg: #0a0e27;
-            --color-surface: #141b3a;
-            --color-elevated: #1a2340;
-            --color-text: #e8edf5;
-            --color-text-muted: #8b95b0;
-            --color-primary: #00fff5;
-            --color-secondary: #ff6b35;
-            --color-accent: #7c3aed;
-            --color-border: rgba(0, 255, 245, 0.15);
-            --color-glow: rgba(0, 255, 245, 0.3);
-            --gradient-primary: linear-gradient(135deg, #00fff5, #00d4ff);
-            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ff9a76);
-            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --color-bg: #000000;
+            --color-surface: #111111;
+            --color-elevated: #1c1c1c;
+            --color-text: #ffffff;
+            --color-text-muted: #b2b2b2;
+            --color-primary: #ffffff;
+            --color-secondary: #b2b2b2;
+            --color-accent: #8a8a8a;
+            --color-border: rgba(255, 255, 255, 0.14);
+            --color-glow: rgba(255, 255, 255, 0.18);
+            --color-signal: #ffb400;
+            --signal-glow: rgba(255, 180, 0, 0.35);
+            --gradient-primary: linear-gradient(135deg, #ffffff, #b2b2b2);
+            --gradient-secondary: linear-gradient(135deg, #e6e6e6, #8a8a8a);
+            --gradient-accent: linear-gradient(135deg, #cfcfcf, #7a7a7a);
+            --gradient-signal: linear-gradient(135deg, #ffc94d, #ff9500);
         }
 
         [data-theme="light"] {
             --color-bg: #ffffff;
-            --color-surface: #f8fafc;
-            --color-elevated: #f1f5f9;
-            --color-text: #0f172a;
-            --color-text-muted: #475569;
-            --color-primary: #0891b2;
-            --color-secondary: #ea580c;
-            --color-accent: #7c3aed;
-            --color-border: rgba(8, 145, 178, 0.2);
-            --color-glow: rgba(8, 145, 178, 0.15);
-            --gradient-primary: linear-gradient(135deg, #0891b2, #06b6d4);
-            --gradient-secondary: linear-gradient(135deg, #ea580c, #f97316);
-            --gradient-accent: linear-gradient(135deg, #7c3aed, #a78bfa);
+            --color-surface: #f4f4f4;
+            --color-elevated: #e9e9e9;
+            --color-text: #000000;
+            --color-text-muted: #5f5f5f;
+            --color-primary: #000000;
+            --color-secondary: #6b6b6b;
+            --color-accent: #8a8a8a;
+            --color-border: rgba(0, 0, 0, 0.12);
+            --color-glow: rgba(0, 0, 0, 0.10);
+            --color-signal: #c77f00;
+            --signal-glow: rgba(199, 127, 0, 0.28);
+            --gradient-primary: linear-gradient(135deg, #000000, #6b6b6b);
+            --gradient-secondary: linear-gradient(135deg, #333333, #8a8a8a);
+            --gradient-accent: linear-gradient(135deg, #555555, #999999);
+            --gradient-signal: linear-gradient(135deg, #e0940a, #c77f00);
         }
 
         body {
@@ -124,7 +140,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 14, 39, 0.7);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--color-border);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -135,7 +151,7 @@
         }
 
         header.scrolled {
-            background: rgba(10, 14, 39, 0.95);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(20px) saturate(180%);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
@@ -185,7 +201,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
+            background: var(--gradient-signal);
             transition: width 0.3s ease;
         }
 
@@ -274,23 +290,23 @@
 
         .btn-primary {
             background: var(--gradient-primary);
-            color: #0a0e27;
+            color: var(--color-bg);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 255, 245, 0.3);
+            box-shadow: 0 8px 24px var(--signal-glow);
         }
 
         .btn-secondary {
             background: transparent;
-            border: 2px solid var(--color-secondary);
-            color: var(--color-secondary);
+            border: 2px solid var(--color-signal);
+            color: var(--color-signal);
         }
 
         .btn-secondary:hover {
-            background: var(--color-secondary);
-            color: #ffffff;
+            background: var(--color-signal);
+            color: #000000;
         }
 
         .hero {
@@ -314,7 +330,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            background: var(--gradient-signal);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -341,10 +357,10 @@
             position: relative;
             aspect-ratio: 1;
             background: var(--color-surface);
-            border: 2px solid var(--color-secondary);
+            border: 2px solid var(--color-signal);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 25px 50px var(--signal-glow);
         }
 
         .visual-container video {
@@ -360,8 +376,8 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            box-shadow: 0 0 20px var(--color-secondary);
+            background: linear-gradient(90deg, var(--color-signal), #ff8c1a);
+            box-shadow: 0 0 20px var(--color-signal);
             animation: scan 3s ease-in-out infinite;
             top: 0;
             left: 0;
@@ -403,7 +419,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: var(--gradient-primary);
+            background: var(--gradient-signal);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.5s ease;
@@ -415,14 +431,14 @@
 
         .stat-card:hover {
             transform: translateY(-8px);
-            border-color: var(--color-primary);
-            box-shadow: 0 20px 40px rgba(0, 255, 245, 0.2);
+            border-color: var(--color-signal);
+            box-shadow: 0 20px 40px var(--signal-glow);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
-            background: var(--gradient-primary);
+            background: var(--gradient-signal);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -454,7 +470,7 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.875rem;
             font-weight: 600;
-            color: var(--color-secondary);
+            color: var(--color-signal);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 1rem;
@@ -479,6 +495,7 @@
             border-radius: 24px;
             overflow: hidden;
             height: 500px;
+            position: relative;
         }
 
         .mission-image img {
@@ -526,19 +543,19 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: var(--gradient-secondary);
+            background: var(--gradient-signal);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .app-card:hover::before {
-            opacity: 0.05;
+            opacity: 0.08;
         }
 
         .app-card:hover {
             transform: translateY(-12px);
-            border-color: var(--color-secondary);
-            box-shadow: 0 24px 48px rgba(255, 107, 53, 0.3);
+            border-color: var(--color-signal);
+            box-shadow: 0 24px 48px var(--signal-glow);
         }
 
         .app-icon {
@@ -547,7 +564,7 @@
             position: relative;
             z-index: 1;
             font-weight: 700;
-            color: var(--color-secondary);
+            color: var(--color-signal);
         }
 
         .app-card h3 {
@@ -575,11 +592,11 @@
 
         .cta-container {
             background: var(--color-surface);
-            border: 2px solid var(--color-secondary);
+            border: 2px solid var(--color-signal);
             border-radius: 24px;
             padding: 4rem;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2);
+            box-shadow: 0 20px 60px var(--signal-glow);
         }
 
         .cta-container h2 {
@@ -640,7 +657,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--color-secondary);
+            color: var(--color-signal);
         }
 
         .footer-bottom {
@@ -835,6 +852,208 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Logo image (monochrome, transparent PNG) — white on dark, natural on light */
+        .logo-img {
+            height: 38px;
+            width: auto;
+            display: block;
+            filter: brightness(0) invert(1);
+            transition: filter 0.4s ease;
+        }
+
+        [data-theme="light"] .logo-img {
+            filter: none;
+        }
+
+        .footer-brand .logo-img {
+            height: 34px;
+            margin-bottom: 1rem;
+        }
+
+        /* Concept/vision badge for AI-generated imagery */
+        .concept-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.72);
+            color: var(--color-signal);
+            border: 1px solid var(--color-border);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            backdrop-filter: blur(6px);
+        }
+
+        [data-theme="light"] .concept-badge {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--color-signal);
+        }
+
+        /* Real hardware band */
+        .hardware-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .hardware-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hardware-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-signal);
+            box-shadow: 0 20px 40px var(--signal-glow);
+        }
+
+        .hardware-media {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+            background: var(--color-elevated);
+        }
+
+        .hardware-caption {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .hardware-caption h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .hardware-caption p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Team + backers */
+        .team-section {
+            max-width: 1400px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 620px;
+            margin: 0 auto 4.5rem;
+        }
+
+        .team-card {
+            text-align: center;
+        }
+
+        .team-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .team-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-border);
+            margin: 0 auto 1rem;
+            display: block;
+            transition: border-color 0.3s ease;
+        }
+
+        .team-card:hover .team-photo {
+            border-color: var(--color-signal);
+        }
+
+        .team-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            color: var(--color-signal);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-email {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-email:hover {
+            color: var(--color-signal);
+            text-decoration: underline;
+        }
+
+        .backers {
+            text-align: center;
+        }
+
+        .backers-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .backers-logos {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .backer-chip {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 0.9rem 1.4rem;
+            height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .backer-chip img {
+            max-height: 52px;
+            max-width: 160px;
+            width: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -845,7 +1064,7 @@
 
     <header id="header">
         <nav>
-            <a href="index.html" class="logo">MORO MOTION</a>
+            <a href="index.html" class="logo"><img class="logo-img" src="moromotion-logo.png" alt="Moro Motion"></a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="coming-soon.html">Specs</a></li>
                 <li><a href="coming-soon.html">Resources</a></li>
@@ -881,6 +1100,7 @@
 
         <div class="hero-visual">
             <div class="visual-container">
+                <span class="concept-badge">Concept</span>
                 <video autoplay loop muted playsinline>
                     <source src="hero-video.mp4" type="video/mp4">
                 </video>
@@ -892,20 +1112,20 @@
     <section class="stats-section reveal">
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">150<span style="font-size: 2rem;">cm</span> / 5<span style="font-size: 2rem;">ft</span></div>
+                <div class="stat-number">5<span style="font-size: 2rem;">ft</span></div>
                 <div class="stat-label">Height</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">25</div>
+                <div class="stat-number">26</div>
                 <div class="stat-label">Degrees of Freedom</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">15<span style="font-size: 2rem;">kg</span></div>
+                <div class="stat-number">150<span style="font-size: 2rem;">lbs</span></div>
                 <div class="stat-label">Payload Capacity</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" style="font-size: 1.5rem; line-height: 1.3;">LattePanda<br>3 Delta</div>
-                <div class="stat-label">CPU</div>
+                <div class="stat-number">40<span style="font-size: 2rem;">lbs</span></div>
+                <div class="stat-label">System Weight</div>
             </div>
         </div>
     </section>
@@ -925,7 +1145,41 @@
                 </p>
             </div>
             <div class="mission-image">
-                <img src="robot-and-landmine.png" alt="GLENN Robot near landmine">
+                <span class="concept-badge">Concept</span>
+                <img src="robot-and-landmine.png" alt="Concept render: GLENN robot near a landmine">
+            </div>
+        </div>
+    </section>
+
+    <section class="hardware-section reveal">
+        <div class="section-header">
+            <div class="section-label">[ REAL HARDWARE ]</div>
+            <h2>GLENN, <span class="gradient-text">Today</span></h2>
+            <p>Not a render — the working prototype in the lab</p>
+        </div>
+        <div class="hardware-grid">
+            <div class="hardware-card">
+                <img class="hardware-media" src="glenn-in-lab.jpg" alt="GLENN prototype on its test stand in the Moro Motion lab">
+                <div class="hardware-caption">
+                    <h3>In the Lab</h3>
+                    <p>The current prototype on its test rig — real actuators, real electronics.</p>
+                </div>
+            </div>
+            <!-- TODO: second prototype photo — replace src with the picture you pick, and edit the caption.
+            <div class="hardware-card">
+                <img class="hardware-media" src="REPLACE-WITH-PHOTO.jpg" alt="GLENN prototype">
+                <div class="hardware-caption">
+                    <h3>Prototype Detail</h3>
+                    <p>Short caption for this shot.</p>
+                </div>
+            </div>
+            -->
+            <div class="hardware-card">
+                <img class="hardware-media" src="glenn-cad-model.jpg" alt="Full-body CAD model of the GLENN humanoid robot">
+                <div class="hardware-caption">
+                    <h3>Full-Body Design</h3>
+                    <p>The complete 26-DOF platform engineered for a 5 ft, 40 lb frame.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -942,7 +1196,7 @@
                 <p>Safely disarm and manage explosive ordnances from a distance, protecting EOD personnel from life-threatening situations.</p>
             </div>
             <div class="app-card">
-                <div class="app-icon">⚡</div>
+                <div class="app-icon">↯</div>
                 <h3>Disaster Response</h3>
                 <p>Navigate unstable environments to search, rescue, and deliver aid where human access is impossible or too dangerous.</p>
             </div>
@@ -955,6 +1209,43 @@
                 <div class="app-icon">✦</div>
                 <h3>Space Exploration</h3>
                 <p>Perform maintenance and exploration in extraterrestrial environments where human presence is limited or impossible.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section reveal">
+        <div class="section-header">
+            <div class="section-label">[ THE TEAM ]</div>
+            <h2>Built by <span class="gradient-text">Engineers</span></h2>
+            <p>A founding team out of Auburn University</p>
+        </div>
+        <!-- TODO: confirm each person's title before the conference -->
+        <div class="team-grid">
+            <div class="team-card">
+                <a class="team-link" href="https://www.linkedin.com/in/jonah-moro-339786289/" target="_blank" rel="noopener noreferrer" aria-label="Jonah Moro on LinkedIn">
+                    <img class="team-photo" src="jonah-moro.png" alt="Jonah Moro">
+                    <h3>Jonah Moro</h3>
+                </a>
+                <div class="team-role">Founder</div>
+                <a class="team-email" href="mailto:jmm0318@auburn.edu">jmm0318@auburn.edu</a>
+            </div>
+            <div class="team-card">
+                <a class="team-link" href="https://www.linkedin.com/in/sebastian-torres-urzua-371295330/" target="_blank" rel="noopener noreferrer" aria-label="Sebastian Torres on LinkedIn">
+                    <img class="team-photo" src="sebastian-torres.jpg" alt="Sebastian Torres">
+                    <h3>Sebastian Torres</h3>
+                </a>
+                <div class="team-role">Co-Founder</div>
+                <a class="team-email" href="mailto:szt0114@auburn.edu">szt0114@auburn.edu</a>
+            </div>
+        </div>
+        <div class="backers">
+            <div class="backers-label">Backed by</div>
+            <div class="backers-logos">
+                <div class="backer-chip"><img src="auburn-engineering-trim.png" alt="Auburn Engineering"></div>
+                <div class="backer-chip"><img src="is4s-trim.png" alt="IS4S — Integrated Solutions for Systems"></div>
+                <div class="backer-chip"><img src="cyberprotex-trim.png" alt="CyberProtex"></div>
+                <div class="backer-chip"><img src="ethar-trim.png" alt="Ethar — Spatial Intelligence"></div>
+                <div class="backer-chip"><img src="nva-logo.jpg" alt="New Venture Accelerator"></div>
             </div>
         </div>
     </section>
@@ -973,7 +1264,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo">MORO MOTION</div>
+                <img class="logo-img" src="moromotion-logo.png" alt="Moro Motion">
                 <p>Engineering safer futures through humanoid robotics for extreme environments.</p>
             </div>
             <div class="footer-section">
@@ -1001,7 +1292,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Moro Motion. All rights reserved.</p>
+            <p>© 2026 Moro Motion. All rights reserved.</p>
         </div>
     </footer>
 
