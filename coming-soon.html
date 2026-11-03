@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon | MORO MOTION</title>
+    <title>Coming Soon | ULTOR LABS</title>
     <meta name="description" content="This page is currently under development.">
-    <link rel="icon" type="image/png" href="moromotion-logo.png">
+    <!-- TODO: restore once an Ultor Labs logo asset exists — the old file's artwork reads "MORO MOTION".
+    <link rel="icon" type="image/png" href="ultorlabs-logo.png"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -158,11 +159,13 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             text-decoration: none;
             color: var(--color-text);
         }
 
+        /* Parked: re-wire these when an Ultor Labs logo asset is dropped in (swap the
+           .logo wordmark back to <img class="logo-img" src="ultorlabs-logo.png">). */
         .logo-img {
             height: 38px;
             width: auto;
@@ -423,8 +426,9 @@
         }
 
         .footer-brand .logo {
-            margin-bottom: 1rem;
             display: block;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .footer-brand p {
@@ -586,7 +590,7 @@
 
     <header>
         <nav>
-            <a href="index.html" class="logo"><img class="logo-img" src="moromotion-logo.png" alt="Moro Motion"></a>
+            <a href="index.html" class="logo">ULTOR LABS</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="coming-soon.html">Specs</a></li>
                 <li><a href="coming-soon.html">Resources</a></li>
@@ -636,7 +640,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <img class="logo-img" src="moromotion-logo.png" alt="Moro Motion">
+                <div class="logo">ULTOR LABS</div>
                 <p>Engineering safer futures through humanoid robotics for extreme environments.</p>
             </div>
             <div class="footer-section">
@@ -664,7 +668,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Moro Motion. All rights reserved.</p>
+            <p>© 2026 Ultor Labs. All rights reserved.</p>
         </div>
     </footer>
 

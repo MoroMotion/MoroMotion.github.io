@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MORO MOTION | Humanoid Robotics for Extreme Environments</title>
+    <title>ULTOR LABS | Humanoid Robotics for Extreme Environments</title>
     <meta name="description" content="Engineering humanoid robots that save lives in the world's most dangerous environments.">
-    <link rel="icon" type="image/png" href="moromotion-logo.png">
+    <!-- TODO: restore once an Ultor Labs logo asset exists — the old file's artwork reads "MORO MOTION".
+    <link rel="icon" type="image/png" href="ultorlabs-logo.png"> -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Moro Motion | Humanoid Robots for Extreme Environments">
+    <meta property="og:title" content="Ultor Labs | Humanoid Robots for Extreme Environments">
     <meta property="og:description" content="Adaptive humanoid robots that operate in the world's most dangerous environments—so humans don't have to. Meet GLENN.">
     <meta property="og:image" content="glenn-in-lab.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Moro Motion | Humanoid Robots for Extreme Environments">
+    <meta name="twitter:title" content="Ultor Labs | Humanoid Robots for Extreme Environments">
     <meta name="twitter:description" content="Meet GLENN — an adaptive humanoid robot built for bomb disposal, disaster response, and other life-threatening work.">
     <meta name="twitter:image" content="glenn-in-lab.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,7 @@
             box-sizing: border-box;
         }
 
-        /* Monochrome brand palette — #000000 / #ffffff / #b2b2b2 (Moro Motion brand kit) */
+        /* Monochrome brand palette — #000000 / #ffffff / #b2b2b2 (Ultor Labs brand kit) */
         :root {
             --color-bg: #000000;
             --color-surface: #111111;
@@ -173,9 +174,15 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
             text-decoration: none;
             color: var(--color-text);
+        }
+
+        .footer-brand .logo {
+            display: block;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
         }
 
         .nav-menu {
@@ -854,6 +861,8 @@
         }
 
         /* Logo image (monochrome, transparent PNG) — white on dark, natural on light */
+        /* Parked: re-wire these when an Ultor Labs logo asset is dropped in (swap the
+           .logo wordmark back to <img class="logo-img" src="ultorlabs-logo.png">). */
         .logo-img {
             height: 38px;
             width: auto;
@@ -1097,7 +1106,7 @@
 
     <header id="header">
         <nav>
-            <a href="index.html" class="logo"><img class="logo-img" src="moromotion-logo.png" alt="Moro Motion"></a>
+            <a href="index.html" class="logo">ULTOR LABS</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="coming-soon.html">Specs</a></li>
                 <li><a href="coming-soon.html">Resources</a></li>
@@ -1171,7 +1180,7 @@
                     A New Frontier for <span class="gradient-text">Safety</span>
                 </h2>
                 <p>
-                    Moro Motion's mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments.
+                    Ultor Labs' mission is simple: save lives by replacing humans in life-threatening tasks. We are creating the definitive platform for robotics in hazardous environments.
                 </p>
                 <p>
                     From disaster response and bomb disposal to space exploration, we're building humanoid robots as an adaptable platform that merges human intuition with robotic resilience.
@@ -1298,7 +1307,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <img class="logo-img" src="moromotion-logo.png" alt="Moro Motion">
+                <div class="logo">ULTOR LABS</div>
                 <p>Engineering safer futures through humanoid robotics for extreme environments.</p>
             </div>
             <div class="footer-section">
@@ -1326,7 +1335,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Moro Motion. All rights reserved.</p>
+            <p>© 2026 Ultor Labs. All rights reserved.</p>
         </div>
     </footer>
 
